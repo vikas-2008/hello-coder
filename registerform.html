@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>REGISTATION FORM</title>
+<style>
+table {
+border:5px solid grey;
+}
+h2 {
+color:A02334;
+font-size:30px;
+}
+form {
+background;
+width:350px;
+margin:30px auto;
+padding:20px;
+border-radius:10px
+}
+</style>
+</head>
+<center>
+<body>
+<table>
+
+<img src="C:/Users/gpt130/Desktop/VIKAS/pic.jpeg" width="100%" height="100%"  style="position:fixed;top:0;left:0; z-index:-1;" />
+<h2 align="center">REGISTATION FORM</h2>
+
+<form action="details.html" method="post" onsubmit="return validateForm()">
+
+
+<tr>
+<td>First Name:</td>
+<td><input type="text" id="fname" placeholder="Enter First Name"></td>
+</tr>
+
+<tr>
+<td>Last Name:</td>
+<td><input type="text" id="lname" placeholder="Enter Last Name"></td>
+</tr>
+
+<tr>
+<td>Password:</td>
+<td><input type="password" id="password" placeholder="Enter Password"></td>
+</tr>
+
+<tr>
+<td>Confirm Password:</td>
+<td><input type="password" id="confirm" placeholder="Confirm Password"></td>
+</tr>
+
+<tr>
+<td>Phone Number:
+<select id="code">
+<option>+91</option>
+<option>+92</option>
+<option>+93</option>
+<option>+94</option>
+</select></td>
+<td><input type="text" id="phone" placeholder="10-digit phone number"></td>
+</tr>
+
+<tr>
+<td>Gender:</td>
+<td><input type="radio" checked name="gender" id="male" value="Male"> Male
+<input type="radio" name="gender" id="female" value="Female"> Female</td>
+</tr>
+
+<tr>
+<td>Email:</td>
+<td><input type="email" id="email" placeholder="Enter Email" oninput="checkEmail()"></td>
+<div id="email-feedback"></div>
+</tr>
+
+<tr>
+<td>Description:</td>
+<td><textarea name="discription" rows="4" cols="30"></textarea></td>
+</tr>
+
+<br>
+<tr>
+<td align="center"><input type="submit" onclick="checked" value="Submit"></td>
+</tr>
+</form>
+
+
+<script>
+function checkEmail() {
+var email = document.getElementById("email").value;
+var letters = (email.match(/[a-zA-Z]/g) || []).length;
+var numbers = (email.match(/[0-9]/g) || []).length;
+var special = (email.match(/[^a-zA-Z0-9]/g) || []).length;
+
+document.getElementById("email-feedback").innerHTML = msg;
+}
+
+function validateForm() {
+var fname = document.getElementById("fname").value.trim();
+var lname = document.getElementById("lname").value.trim();
+var password = document.getElementById("password").value;
+var confirm = document.getElementById("confirm").value;
+var phone = document.getElementById("phone").value;
+var  email = document.getElementById("email").value;
+var  male = document.getElementById("male").checked;
+var  female = document.getElementById("female").checked;
+
+localStorage.setItem("fname",fname);
+localStorage.setItem("lname",lname);
+
+if (fname === "" || lname === "") {
+alert("Please enter both first and last name.");
+return false;
+}
+
+
+localStorage.setItem("password",password);
+if (password.length < 3) {
+alert("Password should be at least 3 characters.");
+return false;
+}
+
+
+localStorage.setItem("confirm",confirm);
+if (password !== confirm) {
+alert("Passwords do not match.");
+return false;
+}
+
+
+localStorage.setItem("phone",phone);
+if (!/^\d{10}$/.test(phone)) {
+alert("Phone number must be 10 digits.");
+return false;
+}
+
+
+localStorage.setItem("gender",gender);
+if (!male && !female) {
+alert("Please select gender.");
+return false;
+}
+
+let letters = (email.match(/[a-zA-Z]/g) || []).length;
+let numbers = (email.match(/[0-9]/g) || []).length;
+let special = (email.match(/[^a-zA-Z0-9]/g) || []).length;
+
+localStorage.setItem("email",email);
+if (letters < 8 || numbers < 4 || special < 1) {
+alert("Email must contain at least 8 letters, 4 numbers, and 1 symbol.");
+return false;
+}
+
+
+alert("hi");
+alert("Form submitted successfully!");
+return true;
+}
+</script>
+</center>
+</table>
+</body>
+</html>
